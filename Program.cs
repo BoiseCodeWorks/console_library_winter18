@@ -14,10 +14,16 @@ namespace console_library
 
 
       //create books
-      Book readyPlayerOne = new Book("Ready Player One", "Ernest Cline", 541964568);
-      Book harryPotter1 = new Book("Harry Potter and the Sorcerers Stone", "JK Rowlings", 61596845);
-      Book haloFallOfReach = new Book("Halo: Fall of Reach", "John 117", 684961685);
-      Book breifHistoryOfTime = new Book("A Brief History of Time", "Steven Hawking", 561968161);
+      Publication readyPlayerOne = new Book("Ready Player One", "Ernest Cline", 541964568, "VR People");
+      Book harryPotter1 = new Book("Harry Potter and the Sorcerers Stone", "JK Rowlings", 61596845, "PotterHouse");
+      Book haloFallOfReach = new Book("Halo: Fall of Reach", "John 117", 684961685, "Master Chief");
+      Book breifHistoryOfTime = new Book("A Brief History of Time", "Steven Hawking", 561968161, "The Universe");
+
+
+
+
+      //Create magazines
+      Magazine time = new Magazine("Person of the Year", "Time", 523);
 
       // create library
       Library boiseLibrary = new Library("Boise Library");
@@ -28,16 +34,21 @@ namespace console_library
       boiseLibrary.Books.Add(haloFallOfReach);
       boiseLibrary.Books.Add(breifHistoryOfTime);
 
+      boiseLibrary.Books.Add(time);
+
+
+      
+
       //
       while (inLibrary)
       {
         Console.WriteLine("Options: ");
         for (int i = 0; i < boiseLibrary.Books.Count; i++)
         {
-          Book currentbook = boiseLibrary.Books[i];
+          Publication currentbook = boiseLibrary.Books[i];
           if (currentbook.Available)
           {
-            Console.WriteLine(i + 1 + ". " + currentbook.Title +": " + currentbook.Author);
+            Console.WriteLine(i + 1 + ". " + currentbook.myDescription() );
           }
         }
         Console.WriteLine(boiseLibrary.Books.Count + 1 + ". Return Book");
@@ -60,7 +71,7 @@ namespace console_library
         else if(boiseLibrary.hasBook && choice != boiseLibrary.Books.Count + 1)
         {
             Console.Clear();
-            Book outBook = boiseLibrary.Books.Find(b => b.Available == false);
+            Publication outBook = boiseLibrary.Books.Find(b => b.Available == false);
             Console.WriteLine($"Sorry You Already Have A book: {outBook.Title} ... Please return it first");
         }
         else if(choice == boiseLibrary.Books.Count + 1)
